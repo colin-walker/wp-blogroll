@@ -42,6 +42,7 @@
 		global $wp_query;
 		global $post;
 		
+		$blogrollstr = ''; 
 		$args = array(
         	'order'   => 'ASC',
 			'post_type'	=> 'blogroll',
@@ -54,21 +55,18 @@
 		    <?php while ( $query->have_posts() ) : $query->the_post(); 
 				$id = $post->ID;
 				$name = get_the_title();
+				$content = get_the_content();
 				$link = get_post_meta( $id, 'linkurl', true );
 				$feed = get_post_meta( $id, 'feedurl', true );
-			?>   
 				
-        		<div class="blogroll-item">
-            		<h1 class="blogroll-title"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h1>
-					<?php the_content(); ?>
-					<a href="<?php echo $feed; ?>">RSS Feed</a>
-        		</div>
+        		$blogrollstr .= '<div class="blogroll-item">';
+            	$blogrollstr .= '<h2 class="blogroll-title"><a href="' . $link . '">' . $name . '</a></h2>';
+				$blogrollstr .= $content;
+				$blogrollstr .= '<p><a href="' .  $feed . '">RSS Feed</a></p>';
+        		$blogrollstr .= '</div>';
 
-				<?php
-					fwrite($opmlfile, "\t\t\t<outline text='" . $name . "' xmlUrl='" . $feed . "' htmlUrl='" . $link . "' />".PHP_EOL);
-				?>
-
-    		<?php endwhile; wp_reset_postdata(); 
+				fwrite($opmlfile, "\t\t\t<outline text='" . $name . "' xmlUrl='" . $feed . "' htmlUrl='" . $link . "' />".PHP_EOL);
+				endwhile; wp_reset_postdata(); 
 		endif;
 		
 		fwrite($opmlfile, "\t\t</outline>".PHP_EOL);
@@ -78,13 +76,11 @@
 		
 		$domain = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
 		$opmlpath = $domain . '/blogroll.opml';
+
+		$blogrollstr .= '<div class="opmllink">';
+		$blogrollstr .= 'Grab the <a href="' . $opmlpath . '">OPML file</a>';
+		$blogrollstr .= '</div>';
 		
-		?>
-
-		<div class="opmllink">
-			Grab the <a href="<?php echo $opmlpath ?>">OPML file</a>
-		</div>
-
-<?php
-			
+		return $blogrollstr;
+	
 	}
