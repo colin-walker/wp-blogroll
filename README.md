@@ -26,6 +26,9 @@ Blogroll entries have classes assigned to allow for custom styling:
 
 .blogroll-item 		- 	the item container which will probably contain \<P> tags  
 .blogroll-title		-	the item \<H2> tag which contains an \<A> tag
+.blogroll-feed		-	
+
+.opmllink		-	the div containing the OPML file link
 
 
 ## Custom post type
