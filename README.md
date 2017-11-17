@@ -24,8 +24,8 @@ body
 
 Blogroll entries have classes assigned to allow for custom styling:
 
-.blogroll-item 		- 	the item container which will probably contain <P> tags
-.blogroll-title		-	the item <H2> tag which contains an <A> tag
+.blogroll-item 		- 	the item container which will probably contain \<P> tags
+.blogroll-title		-	the item \<H2> tag which contains an \<A> tag
 
 
 ## Custom post type
@@ -41,4 +41,4 @@ to the register_post_type array in br_post_type.php
 
 The plugin will create a blogroll.opml file in the root of your WordPress site so will be at: http(s)://your.domain/blogroll.opml
 
-The file is dynamically created whenever the shortcode is triggered and includes the time of creation in the <dateModified> tag. 
+The file is dynamically created whenever the shortcode is triggered and includes the time of creation in the \<dateModified> tag. 
