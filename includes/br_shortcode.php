@@ -44,8 +44,9 @@
 		
 		$blogrollstr = ''; 
 		$args = array(
-        	'order'   => 'ASC',
-			'post_type'	=> 'blogroll',
+        		'order'   		=> 'ASC',
+			'post_type'		=> 'blogroll',
+			'posts_per_page'	=> -1
 		);
 		
 		$query = new WP_Query( $args );
